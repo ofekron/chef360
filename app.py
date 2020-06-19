@@ -1,13 +1,23 @@
 import json
 
 from flask import Flask, Blueprint, Response
+from werkzeug.utils import redirect
 
 from v1.api import blueprint as v1
 from v2.api import blueprint as v2
 
+
+
+
+
 app = Flask(__name__)
 app.register_blueprint(v1)
 app.register_blueprint(v2)
+latest=v2
+
+@app.route('/')
+def redirect_main():
+    return redirect(f"/api/{latest.name}/docs/", code=302)
 
 @app.errorhandler(404)
 def index(p):

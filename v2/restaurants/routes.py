@@ -1,10 +1,10 @@
-from flask_restplus import Resource
+from utils import SecuredResource
 from ..api import api
 
 ns_res = api.namespace('restaurants', description='Restaurant operations')
 
 @ns_res.route('/')
-class RestaurantsAPI(Resource):
+class RestaurantsAPI(SecuredResource):
     def get(self):
         """
         returns all restaurants
@@ -13,7 +13,7 @@ class RestaurantsAPI(Resource):
 
 
 @ns_res.route('/<string:restaurant_id>')
-class RestaurantAPI(Resource):
+class RestaurantAPI(SecuredResource):
     def get(self,restaurant_id):
         """
         returns a restaurant by id
