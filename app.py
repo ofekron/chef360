@@ -1,4 +1,5 @@
 import json
+import os
 
 from flask import Flask, Blueprint, Response
 from werkzeug.utils import redirect
@@ -28,4 +29,5 @@ def redirect_latest():
 def index(p):
     return Response(json.dumps(['%s' % rule for rule in app.url_map.iter_rules()]), mimetype='application/json')
 if __name__ == '__main__':
+    print(os.environ['DATABASE_URL'])
     app.run()
